@@ -40,9 +40,20 @@ export const DataUploadPage: React.FC = () => {
           </span>
           <span className="text-slate-500 text-xs font-semibold">Dataset & GIS Vector Upload</span>
         </div>
-        <h1 className="text-xl font-bold text-[#123B63] mt-1">Upload & Ingest Spatial Data</h1>
+        <h1 className="text-xl font-bold text-[#123B63] mt-1">Batch Departmental Data & GIS Vector Ingestion</h1>
         <p className="text-slate-600 text-xs mt-1">
           Supports CSV, GeoJSON, Shapefiles, GeoTIFF, and JSON spatial payloads. Automated schema & geometry validation run before dataset activation.
+        </p>
+      </div>
+
+      {/* Batch Ingestion Architectural Notice */}
+      <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg text-xs text-slate-700 space-y-1">
+        <div className="flex items-center space-x-2 text-[#123B63] font-bold">
+          <Info className="w-4 h-4 text-[#1D5D91]" />
+          <span>Batch Data Ingestion vs Manual Record Entry</span>
+        </div>
+        <p className="text-slate-600 leading-relaxed text-[11px]">
+          <strong>No Manual Row-by-Row Typing:</strong> Policy and District Officers do not manually input individual land records. The platform ingests authoritative departmental CSV/GeoJSON data dumps (such as IMD climate CSVs, State Cadastral GeoJSONs, or SIH benchmark CSVs) as an operational fallback when direct live API streams are awaiting whitelisting.
         </p>
       </div>
 
