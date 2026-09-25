@@ -1,3 +1,30 @@
+export interface PipelineStageStep {
+  stage: 'CSV Read' | 'API Fetch' | 'Transform' | 'Validation' | 'Quality Check' | 'PostgreSQL Load' | 'PostGIS Index' | 'Publish';
+  status: 'Completed' | 'Passed' | 'Running' | 'Failed' | 'Warning';
+  timestamp: string;
+  recordsCount: number;
+  durationMs: number;
+  details?: string;
+}
+
+export interface PipelineRunItem {
+  id: string;
+  datasetName: string;
+  sourceFile: string;
+  sourceType: 'Prototype CSV' | 'Prototype Data Source' | 'Authorized Government API (Prod)';
+  productionTarget: string;
+  recordsRead: number;
+  recordsProcessed: number;
+  recordsValidated: number;
+  recordsRejected: number;
+  qualityScore: number;
+  lastRun: string;
+  durationSeconds: number;
+  status: 'Completed' | 'Running' | 'Validation Required' | 'Failed' | 'Source Unavailable';
+  failureReason?: string;
+  stages: PipelineStageStep[];
+}
+
 export interface DataPipelineStatus {
   service: string;
   category: string;
@@ -111,6 +138,100 @@ export interface SpatialAnalysisJob {
 // -------------------------------------------------------------
 // MOCK DATA OFFICERS & BACKEND RECORDS
 // -------------------------------------------------------------
+
+export const MOCK_PIPELINE_RUNS: PipelineRunItem[] = [
+  {
+    id: 'pipe-run-101',
+    datasetName: 'IMD District Monsoon Rainfall Matrix',
+    sourceFile: 'imd_district_rainfall.csv',
+    sourceType: 'Prototype CSV',
+    productionTarget: 'IMD Operational Mausam API (MoES)',
+    recordsRead: 36,
+    recordsProcessed: 36,
+    recordsValidated: 36,
+    recordsRejected: 0,
+    qualityScore: 99.2,
+    lastRun: '25 Sep 2026, 09:42',
+    durationSeconds: 1.2,
+    status: 'Completed',
+    stages: [
+      { stage: 'CSV Read', status: 'Completed', timestamp: '09:42:01', recordsCount: 36, durationMs: 12, details: 'Automatically read imd_district_rainfall.csv' },
+      { stage: 'Transform', status: 'Completed', timestamp: '09:42:02', recordsCount: 36, durationMs: 45, details: 'Parsed normal/actual mm and departure %' },
+      { stage: 'Validation', status: 'Passed', timestamp: '09:42:03', recordsCount: 36, durationMs: 18, details: 'Checked district code foreign key constraints' },
+      { stage: 'Quality Check', status: 'Passed', timestamp: '09:42:04', recordsCount: 36, durationMs: 10, details: '100% attribute completeness score' },
+      { stage: 'PostgreSQL Load', status: 'Completed', timestamp: '09:42:05', recordsCount: 36, durationMs: 25, details: 'Inserted 36 rows into relational schema' },
+      { stage: 'PostGIS Index', status: 'Completed', timestamp: '09:42:06', recordsCount: 36, durationMs: 14, details: 'Indexed EPSG:4326 spatial centroids' }
+    ]
+  },
+  {
+    id: 'pipe-run-102',
+    datasetName: 'Maharashtra Land Records & Climate Risk Matrix',
+    sourceFile: 'bhoomi_drishti_land_climate_risk_updated.csv',
+    sourceType: 'Prototype CSV',
+    productionTarget: 'State Land Revenue & Cadastral WMS/WFS',
+    recordsRead: 2016,
+    recordsProcessed: 2016,
+    recordsValidated: 2016,
+    recordsRejected: 0,
+    qualityScore: 98.5,
+    lastRun: '25 Sep 2026, 09:45',
+    durationSeconds: 4.8,
+    status: 'Completed',
+    stages: [
+      { stage: 'CSV Read', status: 'Completed', timestamp: '09:45:01', recordsCount: 2016, durationMs: 110, details: 'Parsed multi-district land risk CSV' },
+      { stage: 'Transform', status: 'Completed', timestamp: '09:45:03', recordsCount: 2016, durationMs: 320, details: 'Calculated composite vulnerability scores' },
+      { stage: 'Validation', status: 'Passed', timestamp: '09:45:04', recordsCount: 2016, durationMs: 210, details: '0 null geometries or missing codes' },
+      { stage: 'Quality Check', status: 'Passed', timestamp: '09:45:05', recordsCount: 2016, durationMs: 140, details: '98.5% data quality score' },
+      { stage: 'PostgreSQL Load', status: 'Completed', timestamp: '09:45:06', recordsCount: 2016, durationMs: 480, details: 'Bulk inserted 2,016 rows' },
+      { stage: 'PostGIS Index', status: 'Completed', timestamp: '09:45:07', recordsCount: 2016, durationMs: 290, details: 'Indexed spatial bounding boxes' }
+    ]
+  },
+  {
+    id: 'pipe-run-103',
+    datasetName: 'NRSC Bhuvan LULC Spatial Vectors',
+    sourceFile: 'bhoomi_drishti_gis_map_data.json',
+    sourceType: 'Prototype Data Source',
+    productionTarget: 'ISRO Bhuvan Spatial Vector Catalogue',
+    recordsRead: 420,
+    recordsProcessed: 420,
+    recordsValidated: 420,
+    recordsRejected: 0,
+    qualityScore: 100.0,
+    lastRun: '25 Sep 2026, 08:30',
+    durationSeconds: 2.1,
+    status: 'Completed',
+    stages: [
+      { stage: 'CSV Read', status: 'Completed', timestamp: '08:30:01', recordsCount: 420, durationMs: 45, details: 'Read GeoJSON feature collection' },
+      { stage: 'Transform', status: 'Completed', timestamp: '08:30:02', recordsCount: 420, durationMs: 120, details: 'Normalized land use categories' },
+      { stage: 'Validation', status: 'Passed', timestamp: '08:30:03', recordsCount: 420, durationMs: 85, details: '0 polygon self-intersections' },
+      { stage: 'Quality Check', status: 'Passed', timestamp: '08:30:04', recordsCount: 420, durationMs: 50, details: '100% spatial integrity' },
+      { stage: 'PostgreSQL Load', status: 'Completed', timestamp: '08:30:05', recordsCount: 420, durationMs: 190, details: 'Loaded vector features' },
+      { stage: 'PostGIS Index', status: 'Completed', timestamp: '08:30:06', recordsCount: 420, durationMs: 95, details: 'Generated MVT tile indexes' }
+    ]
+  },
+  {
+    id: 'pipe-run-104',
+    datasetName: 'Estuarine Coastal & Mangrove Buffer Zones',
+    sourceFile: 'coastal_crz_buffer.csv',
+    sourceType: 'Prototype CSV',
+    productionTarget: 'Central Water Commission & MCZMA API',
+    recordsRead: 84,
+    recordsProcessed: 80,
+    recordsValidated: 80,
+    recordsRejected: 4,
+    qualityScore: 92.0,
+    lastRun: '24 Sep 2026, 16:20',
+    durationSeconds: 1.8,
+    status: 'Validation Required',
+    failureReason: 'Schema warning: 4 records contain missing mangrove density classifications.',
+    stages: [
+      { stage: 'CSV Read', status: 'Completed', timestamp: '16:20:01', recordsCount: 84, durationMs: 25, details: 'Read 84 coastal buffer records' },
+      { stage: 'Transform', status: 'Completed', timestamp: '16:20:02', recordsCount: 84, durationMs: 65, details: 'Computed CRZ-I 50m offsets' },
+      { stage: 'Validation', status: 'Warning', timestamp: '16:20:03', recordsCount: 80, durationMs: 40, details: '4 records flagged with null mangrove density' },
+      { stage: 'Quality Check', status: 'Warning', timestamp: '16:20:04', recordsCount: 80, durationMs: 30, details: 'Requires officer confirmation' }
+    ]
+  }
+];
 
 export const MOCK_DATA_PIPELINE_STATUS: DataPipelineStatus[] = [
   {
@@ -538,29 +659,29 @@ export const MOCK_OFFICER_SPATIAL_ANALYSIS_JOBS: SpatialAnalysisJob[] = [
 export const MOCK_OFFICER_DATA_ACTIVITIES: DataActivityItem[] = [
   {
     id: 'act-001',
-    timestamp: '25 Sep 2026, 16:10',
-    user: 'Shri Manoj Deshmukh',
+    timestamp: '25 Sep 2026, 09:46',
+    user: 'Automated Pipeline Engine',
     action: 'Validated Geometry',
-    datasetOrLayer: 'Maharashtra District Boundaries (Census 2025)',
-    details: 'Completed topology check with 100% geometric validity (0 self-intersections).',
+    datasetOrLayer: 'Maharashtra Land Records & Climate Risk Matrix',
+    details: '2,016 records loaded into PostgreSQL / PostGIS with 100% spatial index topology.',
     status: 'Success'
   },
   {
     id: 'act-002',
-    timestamp: '25 Sep 2026, 14:30',
+    timestamp: '25 Sep 2026, 09:44',
+    user: 'Automated Pipeline Engine',
+    action: 'Validated Geometry',
+    datasetOrLayer: 'IMD Operational Monsoon Rainfall (imd_district_rainfall.csv)',
+    details: 'Completed automated reading, transformation, and QA for 36 district records.',
+    status: 'Success'
+  },
+  {
+    id: 'act-003',
+    timestamp: '25 Sep 2026, 08:30',
     user: 'Shri Manoj Deshmukh',
     action: 'Flagged Discrepancy',
     datasetOrLayer: 'Nagpur Rural Parcel #142/3',
     details: 'Logged 1.7 ha boundary variance between Revenue record & Bhuvan GIS satellite vector.',
     status: 'Warning'
-  },
-  {
-    id: 'act-003',
-    timestamp: '24 Sep 2026, 11:00',
-    user: 'Priya Sharma',
-    action: 'Uploaded Dataset',
-    datasetOrLayer: 'IMD Operational Monsoon Rainfall v2026.1',
-    details: 'Ingested district-wise rainfall CSV payload and executed automated schema validation.',
-    status: 'Success'
   }
 ];

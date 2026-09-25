@@ -23,11 +23,19 @@ import {
   Layers,
   CloudRain,
   HelpCircle,
-  Activity
+  Activity,
+  Lightbulb,
+  Award,
+  Sparkles,
+  Target,
+  FileCheck,
+  Zap,
+  Clock,
+  Compass
 } from 'lucide-react';
 
 interface SidebarProps {
-  portalType: 'government' | 'research' | 'institution' | 'public' | 'admin' | 'data';
+  portalType: 'government' | 'research' | 'institution' | 'public' | 'admin' | 'data' | 'authority' | 'innovation';
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ portalType }) => {
@@ -36,55 +44,118 @@ export const Sidebar: React.FC<SidebarProps> = ({ portalType }) => {
 
   const getMenuItems = () => {
     switch (portalType) {
+      case 'authority':
+        return [
+          { label: 'Overview', path: '/authority/dashboard', icon: LayoutDashboard },
+
+          // GOVERNANCE
+          { label: 'Data Issues & Escalations', path: '/authority/data-issues', icon: AlertTriangle, section: 'Governance' },
+          { label: 'Freshness Alerts', path: '/authority/data-issues?tab=freshness', icon: Clock },
+          { label: 'Data Correction Requests', path: '/authority/data-issues?tab=corrections', icon: FileCheck },
+
+          // POLICY
+          { label: 'Policy Evidence Hub', path: '/government/research-evidence', icon: BookOpen, section: 'Policy & Experimentation' },
+          { label: 'Policy Scenario Reviews', path: '/authority/policy-reviews', icon: Sliders },
+          { label: 'Policy Experiments', path: '/authority/policy-experiments', icon: Compass },
+
+          // INNOVATION & PILOTS
+          { label: 'Innovation Challenges', path: '/innovation/challenges', icon: Lightbulb, section: 'Innovation & Pilots' },
+          { label: 'Research Grant Reviews', path: '/authority/grants', icon: Award },
+          { label: 'Pilot Project Approvals', path: '/authority/pilots', icon: Zap },
+          { label: 'Pilot Evaluation Outcomes', path: '/innovation/pilots', icon: CheckCircle2 },
+
+          // MONITORING & NOTIFICATIONS
+          { label: 'Implementation Outcomes', path: '/authority/monitoring', icon: BarChart3, section: 'Monitoring & Escalations' },
+          { label: 'Notifications & Alerts', path: '/authority/notifications', icon: ShieldCheck }
+        ];
+
+      case 'innovation':
+        return [
+          { label: 'Innovation Hub', path: '/innovation', icon: LayoutDashboard },
+
+          // INNOVATION ECOSYSTEM
+          { label: 'Innovation Challenges', path: '/innovation/challenges', icon: Lightbulb, section: 'Innovation Modules' },
+          { label: 'Hackathons', path: '/innovation/hackathons', icon: Zap },
+          { label: 'Research Grants', path: '/innovation/grants', icon: Award },
+          { label: 'Pilot Projects', path: '/innovation/pilots', icon: Target },
+          { label: 'Knowledge Competitions', path: '/innovation/competitions', icon: Sparkles },
+
+          // COMPLIANCE & REPOSITORY
+          { label: 'Public Innovation Showcase', path: '/public/innovation', icon: Globe2, section: 'Public & Alignment' },
+          { label: 'PS 26019 Compliance Matrix', path: '/innovation/ps-checklist', icon: ShieldCheck }
+        ];
+
       case 'government':
         return [
           { label: 'Overview', path: '/government/district', icon: LayoutDashboard },
           { label: 'GIS Intelligence', path: '/government/district', icon: MapPin },
           { label: 'State Authority', path: '/government/state', icon: Building },
           { label: 'National Authority', path: '/government/national', icon: Globe2 },
-          { label: 'Land Risk Analysis', path: '/government/risk', icon: AlertTriangle },
+
+          { label: 'Candidate Site Search', path: '/government/district?tab=sitesearch', icon: Target, section: 'Policy & Planning' },
           { label: 'Policy Simulator', path: '/government/policy/simulator', icon: Sliders },
           { label: 'Scenario Comparison', path: '/government/policy/scenario-comparison', icon: BarChart3 },
-          { label: 'Research Evidence', path: '/government/research-evidence', icon: BookOpen },
-          { label: 'Reports', path: '/government/reports', icon: FileText },
+          { label: 'Research Evidence Mapping', path: '/government/research-evidence', icon: BookOpen },
+
+          { label: 'Innovation Pilots', path: '/innovation/pilots', icon: Zap, section: 'Innovation & Execution' },
+          { label: 'Implementation Outcomes', path: '/government/implementation', icon: CheckCircle2 },
           { label: 'Audit Trail', path: '/government/audit', icon: ShieldCheck }
         ];
 
       case 'research':
         return [
           { label: 'Overview', path: '/research', icon: LayoutDashboard },
-          { label: 'AI Research Search', path: '/research/search', icon: Search },
-          { label: 'Research Map', path: '/research/map', icon: MapPin },
-          { label: 'Research Papers', path: '/research/papers', icon: BookOpen },
+
+          // RESEARCH
+          { label: 'AI Research Search', path: '/research/search', icon: Search, section: 'Research Core' },
           { label: 'Research Projects', path: '/research/projects', icon: FolderKanban },
-          { label: 'Datasets', path: '/research/datasets', icon: Database },
-          { label: 'Workspace', path: '/research/workspace', icon: FileSpreadsheet }
+          { label: 'Research Gaps (AI)', path: '/research/gaps', icon: Sparkles },
+          { label: 'Literature & Evidence', path: '/research/papers', icon: BookOpen },
+          { label: 'Research Spatial Map', path: '/research/map', icon: MapPin },
+
+          // DATA & ANALYSIS
+          { label: 'Dataset Explorer', path: '/research/datasets', icon: Database, section: 'Data & Analysis' },
+          { label: 'GIS Explorer', path: '/data/gis-map', icon: Layers },
+          { label: 'Analysis Workspace', path: '/research/workspace', icon: FileSpreadsheet },
+
+          // COLLABORATION & INNOVATION
+          { label: 'Collaborations', path: '/research/workspace', icon: Users, section: 'Collaboration & Innovation' },
+          { label: 'Innovation Challenges', path: '/innovation/challenges', icon: Lightbulb },
+          { label: 'Research Grants', path: '/innovation/grants', icon: Award },
+          { label: 'Pilot Projects', path: '/innovation/pilots', icon: Target }
         ];
 
       case 'institution':
         return [
           { label: 'Overview', path: '/institution', icon: LayoutDashboard },
-          { label: 'Researchers', path: '/institution/researchers', icon: Users },
+
+          // MANAGEMENT
+          { label: 'Researchers', path: '/institution/researchers', icon: Users, section: 'Institution Management' },
           { label: 'Research Projects', path: '/institution/projects', icon: FolderKanban },
           { label: 'Datasets', path: '/institution/datasets', icon: Database },
-          { label: 'Publications', path: '/institution/publications', icon: BookOpen }
+          { label: 'Publications', path: '/institution/publications', icon: BookOpen },
+
+          // INNOVATION PARTICIPATION
+          { label: 'Institutional Grants', path: '/innovation/grants', icon: Award, section: 'Innovation & Grants' },
+          { label: 'Innovation Challenges', path: '/innovation/challenges', icon: Lightbulb },
+          { label: 'Active Pilots', path: '/innovation/pilots', icon: Target }
         ];
 
       case 'public':
         return [
-          { label: 'Home', path: '/public', icon: LayoutDashboard },
+          { label: 'Public Home', path: '/public', icon: LayoutDashboard },
           { label: 'Public GIS Map', path: '/public/map', icon: MapPin },
           { label: 'Research Knowledge', path: '/public/research', icon: BookOpen },
+          { label: 'Public Innovation Hub', path: '/public/innovation', icon: Lightbulb },
+          { label: 'Open Data Portal', path: '/public/open-data', icon: Database },
           { label: 'Public Reports', path: '/public/reports', icon: FileText },
           { label: 'Statistics', path: '/public/statistics', icon: BarChart3 },
-          { label: 'Open Data', path: '/public/open-data', icon: Database },
 
           // Secondary Section
           { label: 'Projects & Initiatives', path: '/public/projects', icon: FolderKanban, section: 'Exploration' },
           { label: 'Land-use Trends', path: '/public/land-use', icon: Layers },
           { label: 'Climate Information', path: '/public/climate', icon: CloudRain },
-          { label: 'About BhoomiDrishti', path: '/public/about', icon: Globe2 },
-          { label: 'Help / Data Guide', path: '/public/help', icon: HelpCircle }
+          { label: 'About BhoomiDrishti', path: '/public/about', icon: Globe2 }
         ];
 
       case 'data':
@@ -93,24 +164,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ portalType }) => {
 
           // DATA MANAGEMENT
           { label: 'Datasets', path: '/data/datasets', icon: Database, section: 'Data Management' },
-          { label: 'Upload & Ingestion', path: '/data/upload', icon: FileSpreadsheet },
+          { label: 'Data Pipeline', path: '/data/pipeline', icon: Activity },
           { label: 'Data Validation', path: '/data/validation', icon: CheckCircle2 },
           { label: 'Data Sources', path: '/data/sources', icon: Globe2 },
-          { label: 'Dataset Versions', path: '/data/versions', icon: FolderKanban },
 
           // GIS MANAGEMENT
           { label: 'GIS Layers', path: '/data/gis-layers', icon: MapPin, section: 'GIS Management' },
           { label: 'GIS Map Workspace', path: '/data/gis-map', icon: Layers },
-          { label: 'Spatial Analysis', path: '/data/spatial-analysis', icon: BarChart3 },
 
           // QUALITY & CONFLICTS
-          { label: 'Data Quality', path: '/data/quality', icon: ShieldCheck, section: 'Quality & Conflicts' },
+          { label: 'Data Quality', path: '/data/quality', icon: ShieldCheck, section: 'Quality & Escalation' },
           { label: 'Data Conflicts', path: '/data/conflicts', icon: AlertTriangle },
-          { label: 'Data Freshness', path: '/data/freshness', icon: CloudRain },
-
-          // SYSTEM
-          { label: 'Integrations', path: '/data/integrations', icon: Sliders, section: 'System' },
-          { label: 'Data Activity Log', path: '/data/activity', icon: Activity }
+          { label: 'Data Freshness Issues', path: '/data/freshness', icon: CloudRain }
         ];
 
       case 'admin':
@@ -140,7 +205,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ portalType }) => {
   const getPortalTitle = () => {
     switch (portalType) {
       case 'government':
-        return 'Government Portal';
+        return 'Policy & Planning Portal';
       case 'research':
         return 'Research Portal';
       case 'institution':
@@ -151,6 +216,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ portalType }) => {
         return 'Data & GIS Officer Portal';
       case 'admin':
         return 'Admin Portal';
+      case 'authority':
+        return 'Higher Authority Portal';
+      case 'innovation':
+        return 'Innovation Ecosystem Hub';
     }
   };
 
@@ -188,7 +257,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ portalType }) => {
                 )}
                 <NavLink
                   to={item.path}
-                  end={item.path === '/public'}
+                  end={item.path === '/public' || item.path === '/innovation' || item.path === '/research' || item.path === '/authority/dashboard'}
                   className={({ isActive }) =>
                     `flex items-center justify-between px-3 py-2 rounded-md transition-colors ${
                       isActive
@@ -211,8 +280,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ portalType }) => {
 
       {/* Footer Info inside Sidebar */}
       <div className="p-3 m-2 bg-[#1D5D91]/30 border border-[#1D5D91]/60 rounded text-[10px] text-slate-300 space-y-1">
-        <p className="font-semibold text-white">Public Access Mode</p>
-        <p className="text-slate-400">Read-Only Governance Information & Evidence Ecosystem.</p>
+        <p className="font-semibold text-white">SIH 26019 National Ecosystem</p>
+        <p className="text-slate-400">Research • Innovation • Evidence • GIS • Decision Intelligence</p>
       </div>
     </aside>
   );

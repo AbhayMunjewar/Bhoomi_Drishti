@@ -53,11 +53,11 @@ export const DataCatalogPage: React.FC = () => {
         </div>
 
         <button
-          onClick={() => navigate('/data/upload')}
+          onClick={() => navigate('/data/pipeline')}
           className="flex items-center space-x-2 bg-[#123B63] hover:bg-[#1D5D91] text-white px-4 py-2 rounded text-xs font-bold transition shadow-xs self-start md:self-auto"
         >
-          <Upload className="w-4 h-4 text-[#C98A18]" />
-          <span>Upload New Dataset</span>
+          <Database className="w-4 h-4 text-[#C98A18]" />
+          <span>View Data Pipeline</span>
         </button>
       </div>
 

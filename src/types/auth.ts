@@ -1,5 +1,6 @@
 export type UserRole = 
   | 'ADMIN'
+  | 'HIGHER_AUTHORITY'
   | 'DATA_GIS_OFFICER'
   | 'RESEARCHER'
   | 'POLICY_PLANNING_OFFICER'

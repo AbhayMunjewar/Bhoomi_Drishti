@@ -23,9 +23,20 @@ export const DataSourcesPage: React.FC = () => {
           </span>
           <span className="text-slate-500 text-xs font-semibold">Data Origin Registry</span>
         </div>
-        <h1 className="text-xl font-bold text-[#123B63] mt-1">External & Internal Data Sources</h1>
+        <h1 className="text-xl font-bold text-[#123B63] mt-1">Data Source Registry & Target Architectures</h1>
         <p className="text-slate-600 text-xs mt-1">
-          Maintain authoritative provenance records, license policies, sync frequencies, and API access statuses.
+          Maintain authoritative provenance records, license policies, prototype sources, and production target endpoints.
+        </p>
+      </div>
+
+      {/* Prototype Source vs Production Target Banner */}
+      <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg text-xs space-y-1">
+        <div className="flex items-center space-x-2 text-[#123B63] font-bold">
+          <Database className="w-4 h-4 text-[#1D5D91]" />
+          <span>Prototype Source Layer vs Production Target APIs</span>
+        </div>
+        <p className="text-slate-600 text-[11px] leading-relaxed">
+          In this SIH prototype environment, datasets are ingested from prepared CSV/GeoJSON files representing production feeds. In production, these connectors seamlessly bind to live, whitelisted government data services (such as IMD Mausam API, ISRO Bhuvan WMS/WFS, or data.gov.in).
         </p>
       </div>
 

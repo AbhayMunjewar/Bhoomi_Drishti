@@ -95,3 +95,38 @@ export const DataLayout: React.FC = () => {
   );
 };
 
+export const AuthorityLayout: React.FC = () => {
+  return (
+    <div className="min-h-screen flex flex-col bg-[#F5F7F9] text-[#1F2933]">
+      <GovtTopBar />
+      <GovtHeader />
+      <div className="flex-1 flex w-full">
+        <Sidebar portalType="authority" />
+        <main id="main-content" className="flex-1 p-6 overflow-x-hidden">
+          <div className="max-w-7xl space-y-6">
+            <Outlet />
+          </div>
+        </main>
+      </div>
+      <GovtFooter />
+    </div>
+  );
+};
+
+export const InnovationLayout: React.FC = () => {
+  return (
+    <div className="min-h-screen flex flex-col bg-[#F5F7F9] text-[#1F2933]">
+      <GovtTopBar />
+      <GovtHeader />
+      <div className="flex-1 flex w-full">
+        <Sidebar portalType="innovation" />
+        <main id="main-content" className="flex-1 p-6 overflow-x-hidden">
+          <div className="max-w-7xl space-y-6">
+            <Outlet />
+          </div>
+        </main>
+      </div>
+      <GovtFooter />
+    </div>
+  );
+};

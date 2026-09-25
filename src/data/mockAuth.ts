@@ -59,5 +59,15 @@ export const MOCK_USERS: Record<string, UserProfile> = {
     role: 'PUBLIC_USER',
     department: 'Open Data Information Portal',
     avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80'
+  },
+  HIGHER_AUTHORITY: {
+    id: 'usr-auth-07',
+    name: 'Dr. K. S. Rajan (IAS)',
+    email: 'higher.authority@dolr.gov.in',
+    officialId: 'GOV-DoLR-SEC-001',
+    role: 'HIGHER_AUTHORITY',
+    department: 'Department of Land Resources (DoLR), MoRD',
+    jurisdictionState: 'National',
+    avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80'
   }
 };

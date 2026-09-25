@@ -2,13 +2,21 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
 import { GovernmentLayout } from './layouts/GovernmentLayout';
-import { ResearchLayout, InstitutionLayout, PublicLayout, AdminLayout, DataLayout } from './layouts/PortalLayouts';
+import {
+  ResearchLayout,
+  InstitutionLayout,
+  PublicLayout,
+  AdminLayout,
+  DataLayout,
+  AuthorityLayout,
+  InnovationLayout
+} from './layouts/PortalLayouts';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 
-// Role 4: Government / Policy & Planning Pages
+// Policy & Planning Pages
 import { DistrictDashboard } from './pages/government/DistrictDashboard';
 import { StateDashboard, NationalDashboard } from './pages/government/HigherAuthorityDashboards';
 import { CandidateSiteSearchPage } from './pages/government/CandidateSiteSearchPage';
@@ -18,11 +26,11 @@ import { ResearchEvidencePage } from './pages/government/ResearchEvidencePage';
 import { ImplementationMonitoringPage } from './pages/government/ImplementationMonitoringPage';
 import { AuditTrailPage } from './pages/government/AuditTrailPage';
 
-// Role 2: Data & GIS Officer Pages
+// Data & GIS Officer Pages
 import { DataDashboard } from './pages/data/DataDashboard';
 import { DataCatalogPage } from './pages/data/DataCatalogPage';
 import { DataDatasetDetailPage } from './pages/data/DataDatasetDetailPage';
-import { DataUploadPage } from './pages/data/DataUploadPage';
+import { DataPipelinePage } from './pages/data/DataPipelinePage';
 import { DataValidationPage } from './pages/data/DataValidationPage';
 import { DataSourcesPage } from './pages/data/DataSourcesPage';
 import { DataSourceDetailPage } from './pages/data/DataSourceDetailPage';
@@ -39,14 +47,32 @@ import { DataFreshnessPage } from './pages/data/DataFreshnessPage';
 import { DataIntegrationsPage } from './pages/data/DataIntegrationsPage';
 import { DataActivityLogPage } from './pages/data/DataActivityLogPage';
 
-// Role 3: Research Pages
+// Research Pages
 import { ResearchOverview, ResearchSearch } from './pages/research/ResearchOverviewAndSearch';
 import { PaperDetails } from './pages/research/PaperDetails';
+import { ResearchGapsPage } from './pages/research/ResearchGapsPage';
 
-// Role 5: Institution Pages
+// Institution Pages
 import { InstitutionOverview } from './pages/institution/InstitutionOverview';
 
-// Public Open Information Pages (100% Accessible, Read-Only)
+// Innovation Ecosystem Pages
+import { InnovationOverviewPage } from './pages/innovation/InnovationOverviewPage';
+import { InnovationChallengesPage } from './pages/innovation/InnovationChallengesPage';
+import { HackathonsPage } from './pages/innovation/HackathonsPage';
+import { ResearchGrantsPage } from './pages/innovation/ResearchGrantsPage';
+import { PilotProjectsPage } from './pages/innovation/PilotProjectsPage';
+import { KnowledgeCompetitionsPage } from './pages/innovation/KnowledgeCompetitionsPage';
+import { InnovationDetailPage } from './pages/innovation/InnovationDetailPage';
+import { PSChecklistPage } from './pages/innovation/PSChecklistPage';
+
+// Higher Authority Pages
+import { AuthorityOverviewPage } from './pages/authority/AuthorityOverviewPage';
+import { AuthorityDataIssuesPage } from './pages/authority/AuthorityDataIssuesPage';
+import { AuthorityPolicyReviewsPage } from './pages/authority/AuthorityPolicyReviewsPage';
+import { AuthorityPilotApprovalsPage } from './pages/authority/AuthorityPilotApprovalsPage';
+import { AuthorityMonitoringPage } from './pages/authority/AuthorityMonitoringPage';
+
+// Public Open Information Pages
 import { PublicHome } from './pages/public/PublicHome';
 import { PublicGISMapPage } from './pages/public/PublicGISMapPage';
 import { PublicResearchPage } from './pages/public/PublicResearchPage';
@@ -62,8 +88,9 @@ import { PublicLandUsePage } from './pages/public/PublicLandUsePage';
 import { PublicClimatePage } from './pages/public/PublicClimatePage';
 import { PublicAboutPage } from './pages/public/PublicAboutPage';
 import { PublicHelpPage } from './pages/public/PublicHelpPage';
+import { PublicInnovationPage } from './pages/public/PublicInnovationPage';
 
-// Role 1: System Administrator Pages
+// System Administrator Pages
 import { AdminOverview } from './pages/admin/AdminOverview';
 import { AdminUsersPage } from './pages/admin/AdminUsersPage';
 import { AdminUserDetailPage } from './pages/admin/AdminUserDetailPage';
@@ -83,28 +110,27 @@ import { AdminAuditLogsPage } from './pages/admin/AdminAuditLogsPage';
 import { AdminAuditDetailPage } from './pages/admin/AdminAuditDetailPage';
 import { AdminSettingsPage } from './pages/admin/AdminSettingsPage';
 
-// Workspace & Innovation Pages
+// Workspace Page
 import { WorkspacePage } from './pages/workspace/WorkspacePage';
-import { InnovationPage } from './pages/innovation/InnovationPage';
 
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Main Public Website Layout */}
+        {/* Main Website Layout */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="workspace" element={<WorkspacePage />} />
-          <Route path="innovation" element={<InnovationPage />} />
         </Route>
 
-        {/* Public Open Information Portal (No Login Required - 100% Accessible Read-Only) */}
+        {/* Public Open Information Portal */}
         <Route path="/public" element={<PublicLayout />}>
           <Route index element={<PublicHome />} />
           <Route path="map" element={<PublicGISMapPage />} />
           <Route path="research" element={<PublicResearchPage />} />
           <Route path="research/:id" element={<PublicResearchDetailPage />} />
+          <Route path="innovation" element={<PublicInnovationPage />} />
           <Route path="reports" element={<PublicReportsPage />} />
           <Route path="reports/:id" element={<PublicReportDetailPage />} />
           <Route path="statistics" element={<PublicStatisticsPage />} />
@@ -118,9 +144,33 @@ export const App: React.FC = () => {
           <Route path="help" element={<PublicHelpPage />} />
         </Route>
 
-        {/* STRICT ROLE-PROTECTED PORTALS FOR THE 5 STAKEHOLDER ROLES */}
+        {/* INNOVATION PORTAL ECOSYSTEM (Accessible to all authenticated roles & research community) */}
+        <Route path="/innovation" element={<InnovationLayout />}>
+          <Route index element={<InnovationOverviewPage />} />
+          <Route path="challenges" element={<InnovationChallengesPage />} />
+          <Route path="hackathons" element={<HackathonsPage />} />
+          <Route path="grants" element={<ResearchGrantsPage />} />
+          <Route path="pilots" element={<PilotProjectsPage />} />
+          <Route path="competitions" element={<KnowledgeCompetitionsPage />} />
+          <Route path="ps-checklist" element={<PSChecklistPage />} />
+          <Route path=":id" element={<InnovationDetailPage />} />
+        </Route>
 
-        {/* 1. ROLE 1: SYSTEM ADMINISTRATOR PORTAL */}
+        {/* HIGHER AUTHORITY PORTAL */}
+        <Route element={<ProtectedRoute allowedRoles={['HIGHER_AUTHORITY', 'ADMIN', 'POLICY_PLANNING_OFFICER']} />}>
+          <Route path="/authority" element={<AuthorityLayout />}>
+            <Route index element={<Navigate to="/authority/dashboard" replace />} />
+            <Route path="dashboard" element={<AuthorityOverviewPage />} />
+            <Route path="data-issues" element={<AuthorityDataIssuesPage />} />
+            <Route path="policy-reviews" element={<AuthorityPolicyReviewsPage />} />
+            <Route path="pilots" element={<AuthorityPilotApprovalsPage />} />
+            <Route path="monitoring" element={<AuthorityMonitoringPage />} />
+            <Route path="grants" element={<ResearchGrantsPage />} />
+            <Route path="notifications" element={<AuthorityDataIssuesPage />} />
+          </Route>
+        </Route>
+
+        {/* SYSTEM ADMINISTRATOR PORTAL */}
         <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="/admin/dashboard" replace />} />
@@ -146,14 +196,14 @@ export const App: React.FC = () => {
           </Route>
         </Route>
 
-        {/* 2. ROLE 2: DATA & GIS OFFICER PORTAL */}
+        {/* DATA & GIS OFFICER PORTAL */}
         <Route element={<ProtectedRoute allowedRoles={['DATA_GIS_OFFICER', 'ADMIN']} />}>
           <Route path="/data" element={<DataLayout />}>
             <Route index element={<Navigate to="/data/dashboard" replace />} />
             <Route path="dashboard" element={<DataDashboard />} />
             <Route path="datasets" element={<DataCatalogPage />} />
             <Route path="datasets/:id" element={<DataDatasetDetailPage />} />
-            <Route path="upload" element={<DataUploadPage />} />
+            <Route path="pipeline" element={<DataPipelinePage />} />
             <Route path="validation" element={<DataValidationPage />} />
             <Route path="sources" element={<DataSourcesPage />} />
             <Route path="sources/:id" element={<DataSourceDetailPage />} />
@@ -172,12 +222,13 @@ export const App: React.FC = () => {
           </Route>
         </Route>
 
-        {/* 3. ROLE 3: RESEARCHER PORTAL */}
+        {/* RESEARCHER PORTAL */}
         <Route element={<ProtectedRoute allowedRoles={['RESEARCHER', 'ADMIN']} />}>
           <Route path="/research" element={<ResearchLayout />}>
             <Route index element={<Navigate to="/research/dashboard" replace />} />
             <Route path="dashboard" element={<ResearchOverview />} />
             <Route path="search" element={<ResearchSearch />} />
+            <Route path="gaps" element={<ResearchGapsPage />} />
             <Route path="map" element={<ResearchOverview />} />
             <Route path="papers" element={<ResearchSearch />} />
             <Route path="papers/:id" element={<PaperDetails />} />
@@ -187,7 +238,7 @@ export const App: React.FC = () => {
           </Route>
         </Route>
 
-        {/* 4. ROLE 4: POLICY & PLANNING OFFICER PORTAL */}
+        {/* POLICY & PLANNING OFFICER PORTAL */}
         <Route element={<ProtectedRoute allowedRoles={['POLICY_PLANNING_OFFICER', 'ADMIN']} />}>
           <Route path="/government" element={<GovernmentLayout />}>
             <Route index element={<Navigate to="/government/dashboard" replace />} />
@@ -208,7 +259,7 @@ export const App: React.FC = () => {
           </Route>
         </Route>
 
-        {/* 5. ROLE 5: INSTITUTIONAL USER PORTAL */}
+        {/* INSTITUTIONAL USER PORTAL */}
         <Route element={<ProtectedRoute allowedRoles={['INSTITUTION_USER', 'ADMIN']} />}>
           <Route path="/institution" element={<InstitutionLayout />}>
             <Route index element={<Navigate to="/institution/dashboard" replace />} />

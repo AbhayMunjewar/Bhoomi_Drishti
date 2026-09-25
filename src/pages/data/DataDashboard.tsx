@@ -181,11 +181,11 @@ export const DataDashboard: React.FC = () => {
           </div>
           <div className="flex items-center space-x-3">
             <button
-              onClick={() => navigate('/data/upload')}
-              className="flex items-center space-x-2 bg-[#C98A18] hover:bg-[#a67113] text-white px-4 py-2 rounded text-xs font-bold transition shadow-xs"
+              onClick={() => navigate('/data/pipeline')}
+              className="flex items-center space-x-2 bg-[#C98A18] hover:bg-[#a67113] text-[#123B63] px-4 py-2 rounded text-xs font-bold transition shadow-xs"
             >
-              <Upload className="w-4 h-4" />
-              <span>Upload New Dataset / Layer</span>
+              <RefreshCw className="w-4 h-4" />
+              <span>Run Automated Pipeline</span>
             </button>
           </div>
         </div>
@@ -282,11 +282,11 @@ export const DataDashboard: React.FC = () => {
         </h2>
         <div className="flex flex-wrap gap-2">
           <button
-            onClick={() => navigate('/data/upload')}
+            onClick={() => navigate('/data/pipeline')}
             className="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-100 hover:bg-[#1D5D91] hover:text-white text-slate-700 rounded text-xs font-semibold transition border border-slate-300"
           >
-            <Upload className="w-3.5 h-3.5" />
-            <span>Upload Dataset</span>
+            <RefreshCw className="w-3.5 h-3.5 text-[#1D5D91]" />
+            <span>View Data Pipeline</span>
           </button>
 
           <button
