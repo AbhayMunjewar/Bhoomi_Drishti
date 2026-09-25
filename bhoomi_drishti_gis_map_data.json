@@ -1,0 +1,150 @@
+{
+  "type": "FeatureCollection",
+  "name": "BhoomiDrishti_Land_Parcel_Climate_Risk",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.8777,
+          19.076
+        ]
+      },
+      "properties": {
+        "parcel_id": "LP-MH-2026-001",
+        "parcel_name": "Candidate Area A - Urban Expansion Zone",
+        "district": "Mumbai Suburban",
+        "land_use": "Commercial Tech Park",
+        "area_ha": 12.5,
+        "elevation_m": 8.5,
+        "actual_rainfall_mm": 920.0,
+        "rainfall_departure_pct": 22.7,
+        "vulnerability_score": 69.9,
+        "risk_category": "MODERATE RISK",
+        "recommendation": "MODERATE ASSESSMENT: District experienced 920.0 mm rainfall (+22.7% departure). Additional drainage capacity validation and rainwater harvesting plan required for zoning clearance.",
+        "attribution": "India Meteorological Department (IMD), Ministry of Earth Sciences, Govt. of India"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.0809,
+          19.2183
+        ]
+      },
+      "properties": {
+        "parcel_id": "LP-MH-2026-002",
+        "parcel_name": "Candidate Area B - Industrial Logistics Park",
+        "district": "Thane",
+        "land_use": "Warehousing & Logistics",
+        "area_ha": 28.0,
+        "elevation_m": 12.0,
+        "actual_rainfall_mm": 980.2,
+        "rainfall_departure_pct": 25.7,
+        "vulnerability_score": 62.4,
+        "risk_category": "MODERATE RISK",
+        "recommendation": "MODERATE ASSESSMENT: District experienced 980.2 mm rainfall (+25.7% departure). Additional drainage capacity validation and rainwater harvesting plan required for zoning clearance.",
+        "attribution": "India Meteorological Department (IMD), Ministry of Earth Sciences, Govt. of India"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.1175,
+          18.9894
+        ]
+      },
+      "properties": {
+        "parcel_id": "LP-MH-2026-003",
+        "parcel_name": "Candidate Area C - Greenfield Housing Hub",
+        "district": "Raigad",
+        "land_use": "Residential Township",
+        "area_ha": 45.0,
+        "elevation_m": 5.2,
+        "actual_rainfall_mm": 1250.4,
+        "rainfall_departure_pct": 31.6,
+        "vulnerability_score": 84.7,
+        "risk_category": "HIGH FLOOD RISK",
+        "recommendation": "CRITICAL ACTION REQUIRED: Raigad is experiencing high recent rainfall (1250.4 mm, +31.6% departure from normal). Low elevation (5.2m) & poor drainage require mandatory hydrological flood inundation modeling, 50m stormwater buffer zone, and heavy-duty drainage infrastructure approval before land conversion.",
+        "attribution": "India Meteorological Department (IMD), Ministry of Earth Sciences, Govt. of India"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.8567,
+          18.5204
+        ]
+      },
+      "properties": {
+        "parcel_id": "LP-MH-2026-004",
+        "parcel_name": "Candidate Area D - Solar Power Infrastructure",
+        "district": "Pune",
+        "land_use": "Renewable Energy",
+        "area_ha": 60.0,
+        "elevation_m": 560.0,
+        "actual_rainfall_mm": 520.4,
+        "rainfall_departure_pct": 8.4,
+        "vulnerability_score": 22.9,
+        "risk_category": "LOW RISK",
+        "recommendation": "STANDARD CLEARANCE: Normal rainfall conditions (520.4 mm, +8.4% departure) and adequate elevation (560.0m). Proceed with standard land development approval.",
+        "attribution": "India Meteorological Department (IMD), Ministry of Earth Sciences, Govt. of India"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.9064,
+          17.6599
+        ]
+      },
+      "properties": {
+        "parcel_id": "LP-MH-2026-005",
+        "parcel_name": "Candidate Area E - Agri-Processing Corridor",
+        "district": "Solapur",
+        "land_use": "Agri-Industry",
+        "area_ha": 35.0,
+        "elevation_m": 450.0,
+        "actual_rainfall_mm": 280.5,
+        "rainfall_departure_pct": -15.0,
+        "vulnerability_score": 15.0,
+        "risk_category": "LOW RISK",
+        "recommendation": "STANDARD CLEARANCE: Normal rainfall conditions (280.5 mm, -15.0% departure) and adequate elevation (450.0m). Proceed with standard land development approval.",
+        "attribution": "India Meteorological Department (IMD), Ministry of Earth Sciences, Govt. of India"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.0882,
+          21.1458
+        ]
+      },
+      "properties": {
+        "parcel_id": "LP-MH-2026-006",
+        "parcel_name": "Candidate Area F - Multi-Modal Freight Terminal",
+        "district": "Nagpur",
+        "land_use": "Industrial Freight",
+        "area_ha": 50.0,
+        "elevation_m": 310.0,
+        "actual_rainfall_mm": 620.0,
+        "rainfall_departure_pct": 12.7,
+        "vulnerability_score": 28.3,
+        "risk_category": "LOW RISK",
+        "recommendation": "STANDARD CLEARANCE: Normal rainfall conditions (620.0 mm, +12.7% departure) and adequate elevation (310.0m). Proceed with standard land development approval.",
+        "attribution": "India Meteorological Department (IMD), Ministry of Earth Sciences, Govt. of India"
+      }
+    }
+  ]
+}
