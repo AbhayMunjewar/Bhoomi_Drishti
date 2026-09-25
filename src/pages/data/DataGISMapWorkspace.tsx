@@ -16,7 +16,7 @@ import { MOCK_OFFICER_GIS_LAYERS } from '../../data/mockDataOfficer';
 
 export const DataGISMapWorkspace: React.FC = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
+  const mapRef = useRef<any>(null);
 
   const [activeLayerIds, setActiveLayerIds] = useState<string[]>([
     'lyr-ofc-01',

@@ -16,7 +16,7 @@ export const DataConflictDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const mapContainer = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
+  const mapRef = useRef<any>(null);
 
   const [opacityA, setOpacityA] = useState<number>(0.5);
   const [opacityB, setOpacityB] = useState<number>(0.5);

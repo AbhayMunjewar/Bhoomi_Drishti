@@ -14,7 +14,7 @@ import {
 export const DataVersionComparePage: React.FC = () => {
   const navigate = useNavigate();
   const mapContainer = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
+  const mapRef = useRef<any>(null);
 
   const [versionA, setVersionA] = useState<string>('v2.3');
   const [versionB, setVersionB] = useState<string>('v2.4');
